@@ -1,0 +1,9 @@
+# Requires for limits responses and custom conversion classes
+REQUIRE convert_temp.rb
+REQUIRE convert_light.rb
+
+# Explicitly define command and telemetry files
+# If not given then all the files in cmd/tlm will be processed in
+# alphabetical order
+COMMANDS rpi_cmds.txt
+TELEMETRY rpi_tlm.txt
