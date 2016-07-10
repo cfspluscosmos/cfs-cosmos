@@ -1,6 +1,19 @@
+#----------------------------------------------------------------------
+#------------------------------------------------------------
+# Project: CFS+Cosmos
+# Author: Guilherme Korol
+# Date: 07/2015
+# Adapted by: Rebeca Rodrigues
+# Date: 07/2016
+# Contact: rebeca.n.rod@gmail.com
+# Function: Points the 'components' of the RPI target.
+#----------------------------------------------------------------------
+#------------------------------------------------------------
+
 # Requires for limits responses and custom conversion classes
 REQUIRE convert_temp.rb
 REQUIRE convert_light.rb
+REQUIRE convert_timestamp.rb
 
 # Explicitly define command and telemetry files
 # If not given then all the files in cmd/tlm will be processed in
