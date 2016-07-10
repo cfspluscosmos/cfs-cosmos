@@ -1,3 +1,15 @@
+#----------------------------------------------------------------------
+#------------------------------------------------------------
+# Project: CFS+Cosmos
+# Author: Guilherme Korol
+# Date: 07/2015
+# Adapted by: Rebeca Rodrigues
+# Date: 07/2016
+# Contact: rebeca.n.rod@gmail.com
+# Function: Code called to create the TLM window at Telemetry Viewer.
+#----------------------------------------------------------------------
+#------------------------------------------------------------
+
 SCREEN AUTO AUTO 1.0
 VERTICAL
   TITLE "Telemetry"
@@ -7,6 +19,10 @@ VERTICAL
 		LABELVALUE RPI TLM RECEIVED_TIMEFORMATTED WITH_UNITS 24 # COSMOS Received Time (Local time zone, Formatted string)
 		LABELVALUE RPI TLM RECEIVED_COUNT WITH_UNITS # COSMOS packet received count
 		LABELVALUE RPI TLM PKTID # COMMAND ID
+		LABELVALUE RPI TLM FRAME_COUNT # Frame number
+		LABELVALUE RPI TLM TIME_AT_PI WITH_UNITS 24 # Time at Pi (Local time zone, Formatted string)
 		LABELVALUE RPI TLM TEMP # Temperature
 		LABELVALUE RPI TLM LIGHT # Light
+		LABELVALUE RPI TLM CMD_COUNT # Command number
+		LABELVALUE RPI TLM CHECKSUM # Checksum
 	END
