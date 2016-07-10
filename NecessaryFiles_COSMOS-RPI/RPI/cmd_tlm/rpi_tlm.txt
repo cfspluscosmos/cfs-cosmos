@@ -1,14 +1,31 @@
+#----------------------------------------------------------------------
+#------------------------------------------------------------
+# Project: CFS+Cosmos
+# Author: Guilherme Korol
+# Date: 07/2015
+# Adapted by: Rebeca Rodrigues
+# Date: 07/2016
+# Contact: rebeca.n.rod@gmail.com
+# Function: Points how the telemetry data is decoded.
+#----------------------------------------------------------------------
+#------------------------------------------------------------
+
 TELEMETRY RPI TLM  BIG_ENDIAN "Checking commands from RPi"
   ITEM PKTID 0 16 UINT "COMMAND ID"
   ITEM SEQWORD 16 16 UINT "SEQUENCE WORD"
   ITEM SIZEFIELD 32 16 UINT "SIZE FIELD"
   ITEM COMD 48 2 UINT "COMMAND"
-  ITEM TEMP 64 32 STRING "Temperature"
+  ITEM FRAME_COUNT 64 32 UINT "Frame number"
+  ITEM TIME_AT_PI 96 32 UINT "Time at Pi"
+	READ_CONVERSION convert_timestamp.rb
+  APPEND_ITEM TEMP 32 STRING "Temperature"
 	READ_CONVERSION convert_temp.rb
 	UNITS CELCIUS C
 	FORMAT_STRING "%0.3f"
     LIMITS DEFAULT 1 ENABLED -15 30 60 100
-  ITEM LIGHT 96 32 STRING "Light"
+  APPEND_ITEM LIGHT 32 STRING "Light"
 	READ_CONVERSION convert_light.rb
 	FORMAT_STRING "%0.3f"
 	LIMITS DEFAULT 1 ENABLED 15 30 65 90
+  APPEND_ITEM CMD_COUNT 32 UINT "Command count"
+  APPEND_ITEM CHECKSUM 32 UINT "Checksum"
