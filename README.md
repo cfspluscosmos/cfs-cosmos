@@ -13,10 +13,11 @@ The files that changed are:<br />
 Main differences at Cosmos files are due to: read the new telemetry data and a new approach to make log and send relevant information to a database.<br />
 The files that changed are:<br />
 1. Under <cosmos folder>/config/targets/RPI:
-  1. target.txt: require any new ruby code necessary to conversion of data, in this case, conversion_timestamp.rb.
-  2. Under lib, conversion_timestamp.rb was added.
-  3. Under cmd_tlm, any new item is pointed in rpi_tlm.txt. 
-  4. Under screens, any new item is pointed in tlm.txt 
+  * target.txt: require any new ruby code necessary to conversion of data, in this case, conversion_timestamp.rb.
+  * Under lib, conversion_timestamp.rb was added.
+  * Under cmd_tlm, any new item is pointed in rpi_tlm.txt. 
+  * Under screens, any new item is pointed in tlm.txt 
+
 2. Script Runner is used instead of Telemetry Extractor:
-  1. There is a folder log_app:
-  2. Under procedures, log_app_generator.rb was added.
+  * There is a folder log_app:
+  * Under procedures, log_app_generator.rb was added.
