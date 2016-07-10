@@ -1,7 +1,8 @@
 #---------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
 # Project: CFS+Cosmos
-# 07/2016
+# Author: Rebeca Rodrigues
+# Date: 07/2016
 # Contact: rebeca.n.rod@gmail.com
 # Function: This piece of software is responsible for receive commands from the cFS Telemetry
 # Sistem Tool(EventMessage.py) and respond 'appropriated', interface with sensors, and send
