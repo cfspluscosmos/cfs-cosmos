@@ -1,9 +1,17 @@
-#This piece of software is responsible for receive commands from the cFS Telemetry Sistem Tool(EventMessage.py) 
-#and respond 'appropriated', interface with sensors, and send data packets back to a control center - Cosmos
-#by Guilherme Korol
-#07/2015
-#Please, feel free to finish implementing the things that are not done yet ;)
-#execute it on Python3
+#---------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
+# Project: CFS+Cosmos
+# 07/2016
+# Contact: rebeca.n.rod@gmail.com
+# Function: This piece of software is responsible for receive commands from the cFS Telemetry
+# Sistem Tool(EventMessage.py) and respond 'appropriated', interface with sensors, and send
+# data packets back to a control center - Cosmos
+# Adapted from: Guilherme Korol (07/2015)
+
+# Please, feel free to finish implementing the things that are not done yet ;)
+# Execute it on Python3
+#---------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 
 import time
 import microstacknode.hardware.accelerometer.mma8452q
@@ -20,10 +28,12 @@ from array import array
 light_channel = 0
 temp_channel  = 1
 id = 999
+global frame_count, command_count
+frame_count = 0
+command_count = 0
 
 CMDUTIL_path = '../cmdUtil/cmdUtil'
-#HOST = '10.0.118.213'     #destination address
-HOST = '10.0.101.239'
+HOST = 'XX.X.XXX.XXX'     #destination address
 PORT = '5005'		  #just a port (where Cosmos is listening)
 PKTID = '0x1808'	  #packet id (required by cmdUtil) will be useful later on
 ENDIAN = 'BE'		  #endianess (matching with Cosmos target config)
@@ -100,10 +110,15 @@ def all():
 #no parameters
 #no return
 def sendTlm(val1, val2):
-        #lgtValue = light()
-        #tmpValue = temp()
-        #launch_string = CMDUTIL_path + ' --host=' + HOST + ' --port=' + PORT + ' --pktid=' + PKTID + ' --endian=' + ENDIAN + ' --cmdcode=' + CMDCODE + ' --string=' + '8:' + str(lgtValue) + str(tmpValue)
-        launch_string = CMDUTIL_path + ' --host=' + HOST + ' --port=' + PORT + ' --pktid=' + PKTID + ' --endian=' + ENDIAN + ' --cmdcode=' + CMDCODE + ' --string=' + '8:' + str(val2).zfill(4) + str(val1).zfill(4)
+        global frame_count, command_count
+        frame_count +=1
+        launch_string = (CMDUTIL_path + ' --host=' + HOST + ' --port=' + PORT + ' --pktid=' + PKTID
+                         + ' --endian=' + ENDIAN + ' --cmdcode=' + CMDCODE
+                         + ' --long=' + str(frame_count)
+                         + ' --long=' + str(time.time())
+                         + ' --string=' + '8:' + str(val2).zfill(4) + str(val1).zfill(4)
+                         + ' --long=' + str(command_count)
+                         )
         cmd_args = shlex.split(launch_string)
         subprocess.Popen(cmd_args)
         
@@ -166,21 +181,28 @@ while(True):
 	
         #PRINT LIGHT COMMAND
 	if msg == "LGT":
-       		light()
+		command_count += 1
+		light()
 	#PRINT TEMPERATURE COMMAND
 	elif msg == "TMP":
+        	command_count += 1
         	temp()
 	#PRINT ACCELEROMETER COMMAND
 	elif msg == "ACC":
-                accel()
+        	command_count += 1
+        	accel()
 	#PRINT LIGHT, TEMP, AND ACCELEROMETER
 	elif msg == "ALL":
+                command_count += 1
                 all()                           
 	elif msg == "SID":
+                command_count += 1
                 print('SAT ID: {}'.format(id))
         #MONITORING COMMAND - KEEP SENDING TELEMETRY(AND PRINTING ON SCREEN) TO COSMOS 
 	elif msg == "MNT":
-		while msg != 'STP':     
+	#	frame_count = 0
+		command_count += 1
+		while msg != 'STP':
 			all()
 			time.sleep(1.5)
 			try:
@@ -190,17 +212,21 @@ while(True):
                                         msg = conn.recv()
 			except EOFError:
                                 print("\nWaiting command to stop\n")
+		command_count +=1 
 		print("Stopping telemetry...")
 	#DISABLE FILE COMMAND - REPLICATES
 	elif msg == "STP":
+		command_count += 1
 		#DO SOMETHING, I DONT KONW YET WHAT
 		print("\nSTOP TLM\n")
         #DISABLE LOCAL LOG FILE
 	elif msg == "DFL":
+                command_count += 1
                 fileEnable = False
                 print("\nLOG FILE DISABLE\n")
         #IDLE
 	elif msg == "IDL":
+		command_count += 1
 		pass                        
 	else:
                 print("Usage: XXX")
