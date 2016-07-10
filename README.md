@@ -16,8 +16,4 @@ The files that changed are:<br />
   * target.txt: require any new ruby code necessary to conversion of data, in this case, conversion_timestamp.rb.
   * Under lib, conversion_timestamp.rb was added.
   * Under cmd_tlm, any new item is pointed in rpi_tlm.txt. 
-  * Under screens, any new item is pointed in tlm.txt 
-
-2. Script Runner is used instead of Telemetry Extractor:
-  * There is a folder log_app:
-  * Under procedures, log_app_generator.rb was added.
+  * Under screens, any new item is pointed in tlm.txt
