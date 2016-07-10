@@ -19,4 +19,4 @@ The files that changed are:<br />
    * Under screens, any new item is pointed in tlm.txt.
   2. Script Runner is used instead of Telemetry Extractor:
    * There is now a log_app folder: it has the config.txt file, and the log files are going to created here.
-   * Under "cosmos_folder"/procedures, log_app_generator was added.
+   * Under "cosmos_folder"/procedures, log_app_generator.rb was added.
