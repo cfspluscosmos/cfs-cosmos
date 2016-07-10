@@ -15,7 +15,7 @@ INTERFACE_TARGET EXAMPLE cmd_tlm_server.txt # Use cmd_tlm_server.txt in target p
 
 INTERFACE_TARGET TEMPLATED cmd_tlm_server.txt # Use cmd_tlm_server.txt in target package
 
-INTERFACE RPI_INT udp_interface.rb 10.0.118.250 1235 5005 nil nil 128 10.0 nil
+INTERFACE RPI_INT udp_interface.rb XX.X.XXX.XXXX 1235 5005 nil nil 128 10.0 nil
   TARGET RPI
 
 INTERFACE COSMOS_INT cmd_tlm_server_interface.rb
